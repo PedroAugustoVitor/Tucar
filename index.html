@@ -21,6 +21,19 @@ input,select{outline:none}
 input:focus,select:focus{border-color:#8A6A1C}
 ::placeholder{color:#A3A7AE}
 @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media(max-width:860px){
+  [data-gridfix]{grid-template-columns:1fr!important}
+  [data-adminwrap]{flex-direction:column!important}
+  [data-sidebar]{width:100%!important;min-height:0!important;flex-direction:row!important;overflow-x:auto;gap:6px!important;padding:12px!important;align-items:center}
+  [data-sidebar] [data-sbtitle],[data-sidebar] [data-sbuser]{display:none!important}
+  [data-sidebar] button{width:auto!important;flex:0 0 auto;white-space:nowrap;padding:9px 13px!important}
+  [data-table]{overflow-x:auto!important}
+  [data-table]>div{min-width:600px}
+}
+@media(max-width:520px){
+  [data-stepper] span{display:none}
+  [data-stepper]>div>div:last-child{width:12px!important;margin:0 2px!important}
+}
 </style>
 </helmet>
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -43,7 +56,7 @@ input:focus,select:focus{border-color:#8A6A1C}
 
   <sc-if value="{{ showStepper }}" hint-placeholder-val="{{ true }}">
   <div style="background:#fff;border-bottom:1px solid #E2E4E7;padding:16px clamp(16px,4vw,40px)">
-    <div style="max-width:1120px;margin:0 auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+    <div data-stepper style="max-width:1120px;margin:0 auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
       <sc-for list="{{ steps }}" as="st" hint-placeholder-count="4">
         <div style="display:flex;align-items:center;gap:10px">
           <div style="width:26px;height:26px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;background:{{ st.bg }};color:{{ st.fg }}">{{ st.num }}</div>
@@ -274,15 +287,15 @@ input:focus,select:focus{border-color:#8A6A1C}
 </sc-if>
 
 <sc-if value="{{ isAdmin }}" hint-placeholder-val="{{ false }}">
-<div style="flex:1;display:flex;background:#F1F2F4">
-  <div style="width:236px;background:#23272E;padding:24px 16px;display:flex;flex-direction:column;gap:6px;flex:none;min-height:calc(100vh - 64px)">
-    <div style="font-size:11px;font-weight:800;color:#8B8F97;text-transform:uppercase;letter-spacing:1px;padding:0 14px 12px">Administração</div>
+<div data-adminwrap style="flex:1;display:flex;background:#F1F2F4">
+  <div data-sidebar style="width:236px;background:#23272E;padding:24px 16px;display:flex;flex-direction:column;gap:6px;flex:none;min-height:calc(100vh - 64px)">
+    <div data-sbtitle style="font-size:11px;font-weight:800;color:#8B8F97;text-transform:uppercase;letter-spacing:1px;padding:0 14px 12px">Administração</div>
     <button onClick="{{ goDash }}" style="{{ navDash }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect></svg>Dashboard</button>
     <button onClick="{{ goVeh }}" style="{{ navVeh }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13h13V7H3zM16 9h3l2 3v1h-5z"></path><circle cx="7" cy="17" r="2"></circle><circle cx="17" cy="17" r="2"></circle></svg>Veículos</button>
     <button onClick="{{ goAgenda }}" style="{{ navAgenda }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"></rect><path d="M3 9h18M8 2v4M16 2v4"></path></svg>Agenda</button>
     <button onClick="{{ goClientes }}" style="{{ navClientes }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.5"></circle><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M17 5.5a3 3 0 0 1 0 6M21 20c0-2.4-1.4-4.4-3.5-5.3"></path></svg>Clientes</button>
     <button onClick="{{ goFin }}" style="{{ navFin }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"></path><path d="M7 15l4-5 3 3 5-7"></path></svg>Financeiro</button>
-    <div style="margin-top:auto;padding:14px;background:rgba(255,255,255,.06);border-radius:12px;display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:999px;background:#D9B24A;color:#23272E;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px">TC</div><div><div style="color:#fff;font-size:13px;font-weight:700">Tucar Admin</div><div style="color:#8B8F97;font-size:11px">Gestor</div></div></div>
+    <div data-sbuser style="margin-top:auto;padding:14px;background:rgba(255,255,255,.06);border-radius:12px;display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:999px;background:#D9B24A;color:#23272E;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px">TC</div><div><div style="color:#fff;font-size:13px;font-weight:700">Tucar Admin</div><div style="color:#8B8F97;font-size:11px">Gestor</div></div></div>
   </div>
 
   <div style="flex:1;padding:32px clamp(20px,3vw,40px);overflow:auto">
@@ -343,7 +356,7 @@ input:focus,select:focus{border-color:#8A6A1C}
           <div style="display:flex;gap:10px"><button onClick="{{ on.addVehicle }}" style="padding:11px 20px;background:#8A6A1C;color:#fff;border-radius:10px;font-weight:700;font-size:14px">Salvar</button><button onClick="{{ on.toggleAdd }}" style="padding:11px 20px;color:#6A6E76;font-weight:700;font-size:14px">Cancelar</button></div>
         </div>
       </sc-if>
-      <div style="background:#fff;border:1px solid #E2E4E7;border-radius:16px;overflow:hidden">
+      <div data-table style="background:#fff;border:1px solid #E2E4E7;border-radius:16px;overflow:hidden">
         <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr 0.8fr;gap:12px;padding:14px 20px;background:#F7F8FA;font-size:12px;font-weight:800;color:#6A6E76;text-transform:uppercase;letter-spacing:.5px">
           <div>Veículo</div><div>Categoria</div><div>Diária</div><div>Hora extra</div><div>Status</div>
         </div>
@@ -394,7 +407,7 @@ input:focus,select:focus{border-color:#8A6A1C}
     <div style="animation:fade .3s ease">
       <h2 style="font-family:'Space Grotesk',sans-serif;font-size:26px;letter-spacing:-.6px;margin:0 0 4px">Clientes</h2>
       <p style="color:#6A6E76;margin:0 0 24px;font-size:14px">Base de locadores cadastrados</p>
-      <div style="background:#fff;border:1px solid #E2E4E7;border-radius:16px;overflow:hidden">
+      <div data-table style="background:#fff;border:1px solid #E2E4E7;border-radius:16px;overflow:hidden">
         <div style="display:grid;grid-template-columns:2fr 1.4fr 1fr 0.8fr 0.8fr;gap:12px;padding:14px 20px;background:#F7F8FA;font-size:12px;font-weight:800;color:#6A6E76;text-transform:uppercase;letter-spacing:.5px">
           <div>Cliente</div><div>Contato</div><div>CNH</div><div>Locações</div><div>Status</div>
         </div>
@@ -420,7 +433,7 @@ input:focus,select:focus{border-color:#8A6A1C}
           <div style="background:#fff;border:1px solid #E2E4E7;border-radius:16px;padding:20px"><div style="font-size:13px;color:#6A6E76;font-weight:600;margin-bottom:10px">{{ f.label }}</div><div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:26px;letter-spacing:-.5px">{{ f.value }}</div></div>
         </sc-for>
       </div>
-      <div style="background:#fff;border:1px solid #E2E4E7;border-radius:16px;overflow:hidden">
+      <div data-table style="background:#fff;border:1px solid #E2E4E7;border-radius:16px;overflow:hidden">
         <div style="padding:18px 20px;font-weight:800;font-size:15px;border-bottom:1px solid #ECEDEF">Transações</div>
         <div style="display:grid;grid-template-columns:1fr 1.4fr 1.2fr 1fr 1fr 0.9fr;gap:12px;padding:14px 20px;background:#F7F8FA;font-size:12px;font-weight:800;color:#6A6E76;text-transform:uppercase;letter-spacing:.5px">
           <div>Código</div><div>Cliente</div><div>Veículo</div><div>Valor</div><div>Forma</div><div>Status</div>
